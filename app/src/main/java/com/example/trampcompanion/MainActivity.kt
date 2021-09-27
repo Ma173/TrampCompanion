@@ -10,6 +10,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.trampcompanion.ui.main.SectionsPagerAdapter
 import com.example.trampcompanion.databinding.ActivityMainBinding
+import com.example.trampcompanion.ui.main.ScreenSlidePageFragment1
+import com.example.trampcompanion.ui.main.ScreenSlidePageFragment2
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,13 +24,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        sectionsPagerAdapter.addFragment(ScreenSlidePageFragment1())
+        sectionsPagerAdapter.addFragment(ScreenSlidePageFragment2())
+
         val viewPager: ViewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = binding.tabs
         tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = binding.fab
+        val btnNextExercise: FloatingActionButton = binding.btnNextExercise
 
-        fab.setOnClickListener { view ->
+        btnNextExercise.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }

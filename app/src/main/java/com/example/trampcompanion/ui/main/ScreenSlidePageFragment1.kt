@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.trampcompanion.R
 import com.example.trampcompanion.databinding.FragmentMainBinding
 
 /**
@@ -41,7 +42,7 @@ class ScreenSlidePageFragment1 : Fragment() {
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
-        return root
+        return inflater.inflate(R.layout.fragment_main,container,false)
     }
 
     companion object {

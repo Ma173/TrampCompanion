@@ -10,6 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.trampcompanion.R
 import com.example.trampcompanion.databinding.FragmentMainBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import android.widget.ImageButton
 
 /**
  * A placeholder fragment containing a simple view.
@@ -17,11 +20,10 @@ import com.example.trampcompanion.databinding.FragmentMainBinding
 class ScreenSlidePageFragment2 : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
-    private var _binding: FragmentMainBinding? = null
+    private var binding: FragmentMainBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +37,21 @@ class ScreenSlidePageFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         val root = binding.root
 
         val textView: TextView = binding.sectionLabel
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        })
-        return root
+        }
+        )
+        binding = FragmentMainBinding.inflate(layoutInflater)
+        val btnTimerStart = binding.btnTimerStart
+        btnTimerStart.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+        return inflater.inflate(R.layout.fragment_jumptimer_coordinatorlayout,container,false)
     }
 
     companion object {
@@ -66,8 +75,9 @@ class ScreenSlidePageFragment2 : Fragment() {
         }
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 }
