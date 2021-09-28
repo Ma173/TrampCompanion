@@ -1,4 +1,4 @@
-package com.example.trampcompanion.ui.main
+package com.example.trampcompanion.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,18 +10,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.trampcompanion.R
 import com.example.trampcompanion.databinding.FragmentMainBinding
+import com.google.android.material.snackbar.Snackbar
+import com.example.trampcompanion.ui.main.PageViewModel
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class ScreenSlidePageFragment1 : Fragment() {
+class ScreenSlidePageFragment2 : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
-    private var _binding: FragmentMainBinding? = null
+    private var binding: FragmentMainBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +36,21 @@ class ScreenSlidePageFragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = FragmentMainBinding.inflate(inflater, container, false)
         val root = binding.root
 
         val textView: TextView = binding.sectionLabel
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
-        })
-        return inflater.inflate(R.layout.fragment_main,container,false)
+        }
+        )
+        binding = FragmentMainBinding.inflate(layoutInflater)
+        val btnTimerStart = binding.btnTimerStart
+        btnTimerStart.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+        return inflater.inflate(R.layout.fragment_jumptimer_coordinatorlayout,container,false)
     }
 
     companion object {
@@ -57,8 +65,8 @@ class ScreenSlidePageFragment1 : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): ScreenSlidePageFragment1 {
-            return ScreenSlidePageFragment1().apply {
+        fun newInstance(sectionNumber: Int): ScreenSlidePageFragment2 {
+            return ScreenSlidePageFragment2().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }
@@ -66,8 +74,9 @@ class ScreenSlidePageFragment1 : Fragment() {
         }
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 }

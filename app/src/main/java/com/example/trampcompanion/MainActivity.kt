@@ -6,37 +6,34 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import com.example.trampcompanion.ui.main.SectionsPagerAdapter
 import com.example.trampcompanion.databinding.ActivityMainBinding
-import com.example.trampcompanion.ui.main.ScreenSlidePageFragment1
-import com.example.trampcompanion.ui.main.ScreenSlidePageFragment2
+import com.example.trampcompanion.ui.main.fragments.*
+import com.example.trampcompanion.ui.main.fragments.adapters.ViewPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setUpTabs()
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        sectionsPagerAdapter.addFragment(ScreenSlidePageFragment1())
-        sectionsPagerAdapter.addFragment(ScreenSlidePageFragment2())
+    }
 
-        val viewPager: ViewPager = binding.viewPager
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = binding.tabs
+    private fun setUpTabs(){
+        val adapter = ViewPagerAdapter(supportFragmentManager)
+        adapter.addFragment(FavoritesFragment(),"Einstellungen")
+        adapter.addFragment(HomeFragment(), "Übungen")
+        adapter.addFragment(JumptimerFragment(),"Sprung-Timer")
+        viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
-        val btnNextExercise: FloatingActionButton = binding.btnNextExercise
 
-        btnNextExercise.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        tabs.getTabAt(0)!!.setIcon(R.drawable.ic_baseline_favorite_24)
+        tabs.getTabAt(1)!!.setIcon(R.drawable.ic_baseline_add_road_24)
+        tabs.getTabAt(2)!!.setIcon(R.drawable.ic_baseline_emoji_people_24)
 
     }
 

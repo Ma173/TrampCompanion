@@ -1,4 +1,4 @@
-package com.example.trampcompanion.ui.main
+package com.example.trampcompanion.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.trampcompanion.R
 import com.example.trampcompanion.databinding.FragmentMainBinding
+import com.example.trampcompanion.ui.main.PageViewModel
 
 /**
  * A placeholder fragment containing a simple view.
